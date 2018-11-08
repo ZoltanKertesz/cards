@@ -1,0 +1,51 @@
+<div id="deckContainer">
+  <div id="headerSettings" *ngIf="gameStarted">
+      <label id="headerDeckSelectLabel" for="deckSelect" >Deck size:</label>
+      <select id="headerDeckSizeSelect" name="deckSelect" [(ngModel)]="deckSize" >
+        <option [value]="6">6</option>
+        <option [value]="8">8</option>
+        <option [value]="10">10</option>
+        <option [value]="12">12</option>
+        <option [value]="14">14</option>
+        <option [value]="16">16</option>
+        <option [value]="18">18</option>
+        <option [value]="20">20</option>
+      </select>
+      <input id="headerStart" type="button" value="START NEW GAME" (click)="fillDeck()">
+  </div>
+
+  <div id="gameStartContainer" *ngIf="!gameStarted">
+    <h1>SUPERCHARGE</h1>
+    <h3>MEMORY GAME</h3>
+    <label id="deckSelectLabel" for="deckSelect" >Deck size:</label>
+    <br>
+    <select id="deckSizeSelect" name="deckSelect" [(ngModel)]="deckSize" >
+      <option [value]="6">6</option>
+      <option [value]="8">8</option>
+      <option [value]="10">10</option>
+      <option [value]="12">12</option>
+      <option [value]="14">14</option>
+      <option [value]="16">16</option>
+      <option [value]="18">18</option>
+      <option [value]="20">20</option>
+    </select>
+    <br>
+    <input id="start" type="button" value="START NEW GAME" (click)="fillDeck()">
+  </div>
+
+  <div id="InGameContainer" *ngIf="gameStarted">
+    <div id="scoreBoardContainer" *ngIf="gameStarted">
+      <label id="triesCounter">Current tries: {{tries}}</label>
+      <label id="best">Best: </label>
+      <button id="restart" (click)="restartGame()">RESTART</button>
+      <br>
+      <label id="hiScore">{{hiScore}}</label>
+    </div>
+
+    <div id="cardsContainer">
+      <div id="card" *ngFor="let card of deck" [ngStyle]="{'background-color': card.matched ? 'rgba(255, 255, 255, 0)' : 'white','box-shadow': card.matched ? 'none' : '0 0 3px #000000' }" (click)="check(card)" >
+        <img *ngIf="!card.hidden" [ngStyle]="{'opacity': card.matched ? '0.5' : '1'}" src="../../assets/images/cards/{{card.symbol}}.png">
+      </div>
+    </div>
+  </div>
+</div>
